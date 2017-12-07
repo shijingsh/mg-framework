@@ -1,0 +1,30 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <parent>
+        <artifactId>mg_core</artifactId>
+        <groupId>com.mg.mg_core</groupId>
+        <version>1.0</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.mg.mg_core</groupId>
+    <artifactId>mg-common</artifactId>
+    <packaging>jar</packaging>
+    <name>mg-common</name>
+    <url>http://maven.apache.org</url>
+    <dependencies>
+        <dependency>
+            <groupId>com.mg.mg_core</groupId>
+            <artifactId>mg-entity</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.mg.mg_core</groupId>
+            <artifactId>mg-groovy</artifactId>
+            <version>1.0</version>
+        </dependency>
+    </dependencies>
+    <build>
+        <finalName>mg-common</finalName>
+        <defaultGoal>compile</defaultGoal>
+    </build>
+</project>
