@@ -3,13 +3,13 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>mg_core</artifactId>
-        <groupId>com.mg.mg_core</groupId>
+        <artifactId>mg_framework</artifactId>
+        <groupId>com.github.mg365</groupId>
         <version>1.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.mg.mg_core</groupId>
+    <groupId>com.github.mg365</groupId>
     <artifactId>mg-report</artifactId>
     <packaging>jar</packaging>
     <name>mg-report</name>
@@ -17,7 +17,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.mg.mg_core</groupId>
+            <groupId>com.github.mg365</groupId>
             <artifactId>mg-common</artifactId>
             <version>1.0</version>
         </dependency>

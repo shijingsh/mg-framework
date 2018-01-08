@@ -2,7 +2,7 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.github.mg_framework</groupId>
+  <groupId>com.github.mg365</groupId>
   <artifactId>mg_framework</artifactId>
   <version>1.0</version>
   <modules>
@@ -16,6 +16,25 @@
   <name>mg_framework</name>
   <url>http://maven.apache.org</url>
 
+  <licenses>
+    <license>
+      <name>The Apache Software License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+  <scm>
+    <url>https://github.com/mg365/mg_framework</url>
+    <connection>git@github.com:mg365/mg_framework.git</connection>
+    <developerConnection>https://github.com/mg365</developerConnection>
+  </scm>
+  <developers>
+    <developer>
+      <name>liukefu</name>
+      <email>liukefu2050@sina.com</email>
+      <url>https://github.com/mg365</url>
+    </developer>
+  </developers>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -141,7 +160,6 @@
           <server>tomcat</server>
         </configuration>
       </plugin>
-
     </plugins>
   </build>
 
