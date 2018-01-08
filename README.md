@@ -7,37 +7,37 @@ Add dependency to your project
 ~~~xml
   <dependencies>
     <dependency>
-      <groupId>com.mg.mg_core</groupId>
-      <artifactId>mg_core</artifactId>
+      <groupId>com.github.mg365</groupId>
+      <artifactId>mg_framework</artifactId>
       <version>1.0</version>
       <type>pom</type>
     </dependency>
     <dependency>
-      <groupId>com.mg.mg_core</groupId>
+      <groupId>com.github.mg365</groupId>
       <artifactId>mg-entity</artifactId>
       <version>1.0</version>
       <type>jar</type>
     </dependency>
     <dependency>
-      <groupId>com.mg.mg_core</groupId>
-      <artifactId>mg-framework</artifactId>
+      <groupId>com.github.mg365</groupId>
+      <artifactId>mg-fw</artifactId>
       <version>1.0</version>
       <type>jar</type>
     </dependency>
     <dependency>
-      <groupId>com.mg.mg_core</groupId>
+      <groupId>com.github.mg365</groupId>
       <artifactId>mg-common</artifactId>
       <version>1.0</version>
       <type>jar</type>
     </dependency>
     <dependency>
-      <groupId>com.mg.mg_core</groupId>
+      <groupId>com.github.mg365</groupId>
       <artifactId>mg-groovy</artifactId>
       <version>1.0</version>
       <type>jar</type>
     </dependency>
     <dependency>
-      <groupId>com.mg.mg_core</groupId>
+      <groupId>com.github.mg365</groupId>
       <artifactId>mg-report</artifactId>
       <version>1.0</version>
       <type>jar</type>
