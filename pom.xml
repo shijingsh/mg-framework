@@ -8,7 +8,7 @@
   </parent>
   <groupId>com.github.mg365</groupId>
   <artifactId>mg_framework</artifactId>
-  <version>1.0</version>
+  <version>${mg.version}</version>
   <modules>
     <module>mg-entity</module>
     <module>mg-fw</module>
@@ -67,7 +67,7 @@
     <shiro.version>1.2.2</shiro.version>
     <querydsl.version>3.5.1</querydsl.version>
     <spring.batch.version>3.0.2.RELEASE</spring.batch.version>
-
+    <mg.version>1.0.1</mg.version>
   </properties>
 
   <build>

@@ -3,7 +3,7 @@
     <parent>
         <artifactId>mg_framework</artifactId>
         <groupId>com.github.mg365</groupId>
-        <version>1.0</version>
+        <version>${mg.version}</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.github.mg365</groupId>
@@ -15,12 +15,12 @@
         <dependency>
             <groupId>com.github.mg365</groupId>
             <artifactId>mg-entity</artifactId>
-            <version>1.0</version>
+            <version>${mg.version}</version>
         </dependency>
         <dependency>
             <groupId>com.github.mg365</groupId>
             <artifactId>mg-groovy</artifactId>
-            <version>1.0</version>
+            <version>${mg.version}</version>
         </dependency>
     </dependencies>
     <build>
