@@ -7,12 +7,12 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.github.mg365</groupId>
-    <artifactId>mg-framework</artifactId>
+    <artifactId>mg-fw</artifactId>
     <packaging>jar</packaging>
-    <name>mg-framework</name>
+    <name>mg-fw</name>
     <url>http://maven.apache.org</url>
     <build>
-        <finalName>mg-framework</finalName>
+        <finalName>mg-fw</finalName>
         <defaultGoal>compile</defaultGoal>
     </build>
 </project>

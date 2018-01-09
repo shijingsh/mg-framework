@@ -77,7 +77,7 @@
     <dependencies>
         <dependency>
             <groupId>com.github.mg365</groupId>
-            <artifactId>mg-framework</artifactId>
+            <artifactId>mg-fw</artifactId>
             <version>1.0</version>
         </dependency>
     </dependencies>
