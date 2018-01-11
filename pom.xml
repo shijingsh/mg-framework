@@ -28,8 +28,8 @@
     </license>
   </licenses>
   <scm>
-    <url>https://github.com/mg365/mg_framework</url>
-    <connection>scm:git:git@github.com:mg365/mg_framework.git</connection>
+    <url>https://github.com/mg365/mg-framework</url>
+    <connection>scm:git:git@github.com:mg365/mg-framework.git</connection>
     <developerConnection>https://github.com/mg365</developerConnection>
   </scm>
   <developers>
