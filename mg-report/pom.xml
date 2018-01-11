@@ -3,9 +3,9 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>mg_framework</artifactId>
+        <artifactId>mg-framework</artifactId>
         <groupId>com.github.mg365</groupId>
-        <version>${mg.version}</version>
+        <version>1.0.3</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -19,7 +19,7 @@
         <dependency>
             <groupId>com.github.mg365</groupId>
             <artifactId>mg-common</artifactId>
-            <version>${mg.version}</version>
+            <version>1.0.3</version>
         </dependency>
     </dependencies>
 

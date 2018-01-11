@@ -8,7 +8,7 @@ Add dependency to your project
   <dependencies>
     <dependency>
       <groupId>com.github.mg365</groupId>
-      <artifactId>mg_framework</artifactId>
+      <artifactId>mg-framework</artifactId>
       <version>1.0</version>
       <type>pom</type>
     </dependency>
