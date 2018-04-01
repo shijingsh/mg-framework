@@ -3,7 +3,7 @@
     <parent>
         <artifactId>mg-framework</artifactId>
         <groupId>com.github.mg365</groupId>
-        <version>1.0.3</version>
+        <version>1.0.4</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -78,7 +78,7 @@
         <dependency>
             <groupId>com.github.mg365</groupId>
             <artifactId>mg-fw</artifactId>
-            <version>1.0.3</version>
+            <version>1.0.4</version>
         </dependency>
     </dependencies>
 

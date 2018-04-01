@@ -63,7 +63,7 @@ public class UserController {
             return JsonResponse.error(10000, "修改员工信息出现异常");
         }
 
-        return JsonResponse.success();
+        return JsonResponse.success(user);
     }
 
     @ResponseBody

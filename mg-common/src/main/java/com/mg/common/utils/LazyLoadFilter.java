@@ -79,14 +79,14 @@ public class LazyLoadFilter implements PropertyFilter {
 //                    logger.debug("check {}.{} for obj name {} and property name {}", object.getClass().toString(), name, s[0], s[1]);
                     if (object.getClass().toString().endsWith(s[0]) && name.startsWith(s[1])) {
 //                        logger.debug("match obj name {} and property name {}...............", s[0], s[1]);
-                        logger.debug("matching !!!!!!!");
+//                        logger.debug("matching !!!!!!!");
                         return true;
                     }
                 } else {
                     //仅仅是属性名字
                     if (name.startsWith(propertyName)) {
 //                        logger.debug("match property name {}", propertyName);
-                        logger.debug("matching !!!!!!!");
+ //                       logger.debug("matching !!!!!!!");
                         return true;
                     }
                 }
