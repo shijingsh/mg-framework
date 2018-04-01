@@ -62,43 +62,6 @@ public class FastjsonSimpleFilter implements PropertyPreFilter, ExtraProcessor, 
     @Override
 //    public boolean apply(Object object, String name, Object value) {
     public boolean apply(JSONSerializer serializer, Object object, String name) {
-//        if(value!= null && isComplexObject(value) && isComplexObject(object)) {
-////            logger.debug("check: {}({}) -> {}({})", object.getClass().getName(), ((HRMSBaseEntity) object).getId(), value.getClass().getName(), ((HRMSBaseEntity) value).getId());
-//            Relation relation = new Relation(object, value);
-//
-//            //检查关系已经存在则返回
-//            if(relations.size() > 0) {
-//                logger.debug("check relation: {}", relation);
-//                if(isRelationExistInParent(relation.getB(), relation.getB())) {
-//                    return false;
-//                }
-//            }
-//
-//            relations.add(relation);
-//
-//            logger.debug("relations = {}", relations.size());
-//        }
-//
-//        if(StringUtils.isNotBlank(excludeObjectClassName)) {
-//            if(StringUtils.equals(excludeObjectClassName, object.getClass().getName())) {
-//                return StringUtils.equals("id", name);
-//            }
-//
-//            excludeObjectClassName = null;
-//        }
-//        if (isMatchExcludeObjectAndName(object, name)) {
-//            if(value != null && value instanceof HRMSBaseEntity) {
-//                excludeObjectClassName = value.getClass().getName();
-//            }
-//            else
-//                return false;
-//        }
-
-
-
-
-//        if (name.startsWith("belong"))
-//            return false;
 
         return true;
     }
@@ -109,7 +72,7 @@ public class FastjsonSimpleFilter implements PropertyPreFilter, ExtraProcessor, 
 //            logger.debug("has exclude object names!");
             //有需要额外判断的
             for (String propertyName : excludeObjectNames) {
-                logger.trace("check {}.{} for: {}", object.getClass().toString(), name, propertyName);
+//                logger.trace("check {}.{} for: {}", object.getClass().toString(), name, propertyName);
 
                 //如果是空的，那就跳过继续找下面的
                 if (StringUtils.isBlank(propertyName)) {
@@ -120,17 +83,17 @@ public class FastjsonSimpleFilter implements PropertyPreFilter, ExtraProcessor, 
                 if (propertyName.indexOf(".") > 0) {
                     //带有class名字了
                     String s[] = propertyName.split("\\.");
-                    logger.debug("check {}.{} for obj name {} and property name {}", object.getClass().toString(), name, s[0], s[1]);
+//                    logger.debug("check {}.{} for obj name {} and property name {}", object.getClass().toString(), name, s[0], s[1]);
                     if (object.getClass().toString().endsWith(s[0]) && name.startsWith(s[1])) {
-                        logger.debug("match obj name {} and property name {}...............", s[0], s[1]);
-                        logger.debug("matching !!!!!!!");
+//                        logger.debug("match obj name {} and property name {}...............", s[0], s[1]);
+//                        logger.debug("matching !!!!!!!");
                         return true;
                     }
                 } else {
                     //仅仅是属性名字
                     if (name.startsWith(propertyName)) {
 //                        logger.debug("match property name {}", propertyName);
-                        logger.debug("matching !!!!!!!");
+//                        logger.debug("matching !!!!!!!");
                         return true;
                     }
                 }
