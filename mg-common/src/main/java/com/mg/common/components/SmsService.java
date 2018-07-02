@@ -1,7 +1,15 @@
 package com.mg.common.components;
 
+import com.aliyuncs.DefaultAcsClient;
+import com.aliyuncs.IAcsClient;
+import com.aliyuncs.dysmsapi.model.v20170525.SendSmsRequest;
+import com.aliyuncs.dysmsapi.model.v20170525.SendSmsResponse;
+import com.aliyuncs.exceptions.ClientException;
+import com.aliyuncs.profile.DefaultProfile;
+import com.aliyuncs.profile.IClientProfile;
 import com.mg.common.entity.SmsCodeEntity;
 import com.mg.common.user.service.SmsCodeService;
+import com.mg.framework.sys.PropertyConfigurer;
 import net.sf.ehcache.Cache;
 import net.sf.ehcache.CacheManager;
 import org.apache.commons.lang.StringUtils;
@@ -10,7 +18,6 @@ import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpServletRequest;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -24,12 +31,14 @@ import java.util.Date;
 @Service
 public class SmsService {
 	protected final Logger logger = Logger.getLogger("SmsMsgLog");
-	private static final String apikey = "c8c221c4c55697df4f6c24de53317f24";
-    private static final String url = "http://m.5c.com.cn/api/send/?";
-    private static final String username = "qdyx";
-    private static final String password = "7c79dd68b400e6b0c9f99f8f221dae26";
+
     private static final CacheManager cacheManager = CacheManager.create();
     private static Cache cache = cacheManager.getCache("sendSmsCache");
+
+	//产品名称:云通信短信API产品,开发者无需替换
+	static final String product = "Dysmsapi";
+	//产品域名,开发者无需替换
+	static final String domain = "dysmsapi.aliyuncs.com";
 
 	@Autowired
 	private SmsCodeService smsCodeService;
@@ -72,7 +81,12 @@ public class SmsService {
     	//验证
     	validateTime(mobile);
     	// 创建StringBuffer对象用来操作字符串
-		StringBuffer sb = new StringBuffer(url);
+		String apikey = PropertyConfigurer.getConfig("sms.apikey");
+		String urlSms = PropertyConfigurer.getConfig("sms.url");
+		String username = PropertyConfigurer.getConfig("sms.username");
+		String password = PropertyConfigurer.getConfig("sms.password");
+
+		StringBuffer sb = new StringBuffer(urlSms);
 		// APIKEY
 		sb.append("apikey="+apikey);
 		// 用户名
@@ -103,16 +117,60 @@ public class SmsService {
 		logger.info(strb.toString());
 		return 1;
     }
+
+	public static SendSmsResponse sendSmsAliyun(String mobile, String code) throws ClientException {
+
+		//可自助调整超时时间
+		System.setProperty("sun.net.client.defaultConnectTimeout", "10000");
+		System.setProperty("sun.net.client.defaultReadTimeout", "10000");
+
+		//模板代码
+		String templateCode = PropertyConfigurer.getConfig("sms.templateCode");
+		String accessKeyId = PropertyConfigurer.getConfig("sms.accessKeyId");
+		String accessKeySecret = PropertyConfigurer.getConfig("sms.accessKeySecret");
+		//初始化acsClient,暂不支持region化
+		IClientProfile profile = DefaultProfile.getProfile("cn-hangzhou", accessKeyId, accessKeySecret);
+		DefaultProfile.addEndpoint("cn-hangzhou", "cn-hangzhou", product, domain);
+		IAcsClient acsClient = new DefaultAcsClient(profile);
+
+		//组装请求对象-具体描述见控制台-文档部分内容
+		SendSmsRequest request = new SendSmsRequest();
+		//必填:待发送手机号
+		request.setPhoneNumbers(mobile);
+		//必填:短信签名-可在短信控制台中找到
+		request.setSignName("众家小店");
+		//必填:短信模板-可在短信控制台中找到
+		request.setTemplateCode(templateCode);
+		//可选:模板中的变量替换JSON串,如模板内容为"亲爱的${name},您的验证码为${code}"时,此处的值为
+		request.setTemplateParam("{\"code\":\""+code+"\"}");
+
+		//选填-上行短信扩展码(无特殊需求用户请忽略此字段)
+		//request.setSmsUpExtendCode("90997");
+
+		//可选:outId为提供给业务方扩展字段,最终在短信回执消息中将此值带回给调用者
+		request.setOutId("yourOutId");
+
+		//hint 此处可能会抛出异常，注意catch
+		SendSmsResponse sendSmsResponse = acsClient.getAcsResponse(request);
+
+		return sendSmsResponse;
+	}
+
 	public int sendSmsForVerificationCode(String mobile, String randomStr) throws Exception {
-		String contents = "您的验证码为"+randomStr+"。工作人员不会向您索要，请勿向任何人泄漏。";//【家家云】
+		String contents = "您的验证码为"+randomStr+"。工作人员不会向您索要，请勿向任何人泄漏。";
 		return sendSms(mobile,contents);
 	}
 
+	public int sendSmsAliyunForVerificationCode(String mobile, String randomStr) throws Exception {
+		SendSmsResponse response = sendSmsAliyun(mobile,randomStr);
+		if(response.getCode() != null && response.getCode().equals("OK")) {
+			return 1;
+		}
+
+		return 0;
+	}
 
 	public  boolean validateCode(String mobile,String code) {
-		if("380177".equals(code)){
-			return true;
-		}
 		SmsCodeEntity smsCodeEntity = smsCodeService.findByMobileAndSmsCode(mobile,code);
 		return smsCodeEntity!=null;
 	}

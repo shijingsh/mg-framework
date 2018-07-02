@@ -45,9 +45,13 @@ public class SmsCodeController {
     	try {
         	//发送短信验证码并保存验证码数据
         	String randomStr = getRandomStr();
-    		smsService.sendSmsForVerificationCode(mobile, randomStr);
+    		int flag = smsService.sendSmsAliyunForVerificationCode(mobile, randomStr);
         	System.out.println("短信验证码为："+randomStr);
-
+			if(flag==1){
+				System.out.println("短信验证码发送成功！");
+			}else {
+				System.out.println("短信验证码发送失败！");
+			}
 			SmsCodeEntity smsCodeEntity = new SmsCodeEntity();
 			smsCodeEntity.setMobile(mobile);
 			smsCodeEntity.setSmsCode(randomStr);

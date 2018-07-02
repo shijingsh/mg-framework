@@ -24,6 +24,10 @@ public class PropertyConfigurer extends PropertyPlaceholderConfigurer {
         return ctxPropMap.get(name);
     }
 
+    public static String getConfig(String key)
+    {
+        return (String)ctxPropMap.get(key);
+    }
     public static Map<String, Object> getConfigurer() {
         return ctxPropMap;
     }
