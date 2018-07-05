@@ -131,7 +131,7 @@ public class FastjsonSimpleFilter implements PropertyPreFilter, ExtraProcessor, 
 
     @Override
     public boolean apply(Object object, String name, Object value) {
-        logger.debug("check {}.{}", object.getClass().getName(), name);
+        //logger.debug("check {}.{}", object.getClass().getName(), name);
         if (value instanceof HibernateProxy) {//hibernate代理对象
 
             LazyInitializer initializer = ((HibernateProxy) value).getHibernateLazyInitializer();
