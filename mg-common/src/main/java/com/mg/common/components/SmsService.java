@@ -118,14 +118,13 @@ public class SmsService {
 		return 1;
     }
 
-	public static SendSmsResponse sendSmsAliyun(String mobile, String code) throws ClientException {
+	public static SendSmsResponse sendSmsAliyun(String mobile, String templateParam,String templateCode) throws ClientException {
 
 		//可自助调整超时时间
 		System.setProperty("sun.net.client.defaultConnectTimeout", "10000");
 		System.setProperty("sun.net.client.defaultReadTimeout", "10000");
 
 		//模板代码
-		String templateCode = PropertyConfigurer.getConfig("sms.templateCode");
 		String accessKeyId = PropertyConfigurer.getConfig("sms.accessKeyId");
 		String accessKeySecret = PropertyConfigurer.getConfig("sms.accessKeySecret");
 		//初始化acsClient,暂不支持region化
@@ -142,7 +141,7 @@ public class SmsService {
 		//必填:短信模板-可在短信控制台中找到
 		request.setTemplateCode(templateCode);
 		//可选:模板中的变量替换JSON串,如模板内容为"亲爱的${name},您的验证码为${code}"时,此处的值为
-		request.setTemplateParam("{\"code\":\""+code+"\"}");
+		request.setTemplateParam(templateParam);
 
 		//选填-上行短信扩展码(无特殊需求用户请忽略此字段)
 		//request.setSmsUpExtendCode("90997");
@@ -162,7 +161,18 @@ public class SmsService {
 	}
 
 	public int sendSmsAliyunForVerificationCode(String mobile, String randomStr) throws Exception {
-		SendSmsResponse response = sendSmsAliyun(mobile,randomStr);
+		//模板代码
+		String templateParam = "{\"code\":\""+randomStr+"\"}";
+		String templateCode = PropertyConfigurer.getConfig("sms.templateCode");
+		SendSmsResponse response = sendSmsAliyun(mobile,templateParam,templateCode);
+		if(response.getCode() != null && response.getCode().equals("OK")) {
+			return 1;
+		}
+
+		return 0;
+	}
+	public int sendSms(String mobile, String templateParam,String templateCode) throws Exception {
+		SendSmsResponse response = sendSmsAliyun(mobile,templateParam,templateCode);
 		if(response.getCode() != null && response.getCode().equals("OK")) {
 			return 1;
 		}
