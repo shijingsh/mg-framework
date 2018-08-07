@@ -19,21 +19,21 @@ public class MgDataSource extends DruidDataSource {
 
 //        if(SecurityUtils.getSecurityManager())
         String currentSchemaName = conn.getCatalog();//.getSchema();
-        logger.trace("get connection. schema = {}", currentSchemaName);
+        //logger.trace("get connection. schema = {}", currentSchemaName);
 
         String schemaName = getSchemaName();
         if(schemaName == null) {
-            logger.warn("no schema name to use, use the default schema.");
+           // logger.warn("no schema name to use, use the default schema.");
             conn.setCatalog(DEFAULT_DB);
             conn.createStatement().execute("USE "+DEFAULT_DB);
         }
         else if(schemaName.contentEquals(currentSchemaName)){
-            logger.trace("use the same schema connection. nothing to change.");
+            //logger.trace("use the same schema connection. nothing to change.");
         }
         else {
             conn.setCatalog(schemaName);
             conn.createStatement().execute("USE " + schemaName);
-            logger.trace("use new schema = {}", schemaName);
+            //logger.trace("use new schema = {}", schemaName);
         }
 
         return conn;
@@ -43,7 +43,7 @@ public class MgDataSource extends DruidDataSource {
         try {
             String instanceSeqId = getTenantID();
             if(logger.isTraceEnabled()) {
-                logger.trace("get tenant instance id = {}", instanceSeqId);
+               // logger.trace("get tenant instance id = {}", instanceSeqId);
             }
             if(instanceSeqId == null)
                 return null;
