@@ -5,6 +5,7 @@ import com.mg.common.entity.InstanceEntity;
 import com.mg.common.user.service.UserService;
 import com.mg.common.entity.UserEntity;
 import com.mg.common.instance.service.InstanceService;
+import com.mg.common.user.vo.ThirdUserVo;
 import com.mg.framework.log.Constants;
 import com.mg.framework.utils.WebUtil;
 import com.mg.framework.utils.JsonResponse;
@@ -58,6 +59,44 @@ public class LoginController {
             subject.getSession().setAttribute(Constants.TENANT_ID, instanceEntity.getId());
         }
         try {
+            UsernamePasswordToken token = new UsernamePasswordToken(userEntity.getLoginName(), userEntity.getPassword());
+            subject.login(token);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return JsonResponse.error(100000, e.getMessage());
+        }
+        UserEntity user = userService.getUserById(UserHolder.getLoginUserId());
+        user.setLastLoginDate(new Date());
+        userService.updateUser(user);
+
+        return JsonResponse.success(user, null);
+    }
+
+    @ResponseBody
+    @RequestMapping("/loginThird")
+    public String loginThird() {
+
+        String jsonString = WebUtil.getJsonBody(req);
+        ThirdUserVo thirdUserVo = JSON.parseObject(jsonString, ThirdUserVo.class);
+        if(StringUtils.isBlank(thirdUserVo.getUserId()) || StringUtils.isBlank(thirdUserVo.getAccessToken())){
+            return JsonResponse.error(100000, "没有第三方授权信息。");
+        }
+
+
+        Subject subject = SecurityUtils.getSubject();
+        //判断是否启用多实例
+        String userToken = thirdUserVo.getUserToken();
+        subject.getSession().setAttribute(Constants.TENANT_ID, null);
+        //切换数据库到默认实例
+        InstanceEntity instanceEntity = null;
+        if (StringUtils.isNotBlank(userToken)) {
+            instanceEntity = instanceService.findInstanceByToken(userToken);
+        }
+        if(instanceEntity!=null) {
+            subject.getSession().setAttribute(Constants.TENANT_ID, instanceEntity.getId());
+        }
+        try {
+            UserEntity userEntity = userService.saveOrGetThirdUser(thirdUserVo);
             UsernamePasswordToken token = new UsernamePasswordToken(userEntity.getLoginName(), userEntity.getPassword());
             subject.login(token);
         } catch (Exception e) {

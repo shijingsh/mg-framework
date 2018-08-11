@@ -72,6 +72,10 @@ public class UserEntity extends ExpandEntity {
     private List<RoleEntity> roles = new LinkedList<RoleEntity>();
 
     /**
+     * 第三方登录token
+     */
+    private String accessToken;
+    /**
      * 用户的公司实例标识
      */
     @Transient
@@ -238,5 +242,13 @@ public class UserEntity extends ExpandEntity {
 
     public void setLongitude(BigDecimal longitude) {
         this.longitude = longitude;
+    }
+
+    public String getAccessToken() {
+        return accessToken;
+    }
+
+    public void setAccessToken(String accessToken) {
+        this.accessToken = accessToken;
     }
 }

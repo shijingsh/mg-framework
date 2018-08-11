@@ -6,6 +6,7 @@ import com.mg.common.entity.UserEntity;
 import com.mg.common.entity.UserRuleEntity;
 import com.mg.common.metadata.service.MetaDataExpressService;
 import com.mg.common.metadata.service.MetaDataService;
+import com.mg.common.user.vo.ThirdUserVo;
 import com.mg.common.utils.MD5;
 import com.mg.framework.entity.metadata.MExpressGroupEntity;
 import com.mg.framework.entity.metadata.MExpressionEntity;
@@ -469,5 +470,23 @@ public class UserServiceImpl implements UserService {
             }
         }
         return null;
+    }
+
+    @Transactional
+    public UserEntity saveOrGetThirdUser(ThirdUserVo thirdUserVo) {
+       UserEntity userEntity =  userDao.findByName(thirdUserVo.getUserId());
+       if(userEntity == null){
+            //没有这创建帐户
+           userEntity = new UserEntity();
+           userEntity.setLoginName(thirdUserVo.getUserId());
+           userEntity.setName(thirdUserVo.getUserName());
+           userEntity.setHeadPortrait(thirdUserVo.getUserAvatar());
+           userEntity.setPassword(UserEntity.DEFAULT_PASSWORD);
+           userEntity.setAccessToken(thirdUserVo.getAccessToken());
+
+           userDao.save(userEntity);
+       }
+
+        return userEntity;
     }
 }

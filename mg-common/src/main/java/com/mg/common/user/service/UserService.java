@@ -1,6 +1,7 @@
 package com.mg.common.user.service;
 
 import com.mg.common.entity.UserEntity;
+import com.mg.common.user.vo.ThirdUserVo;
 import com.mg.framework.entity.metadata.MExpressGroupEntity;
 import com.mg.framework.entity.metadata.MObjectEntity;
 import com.mg.framework.entity.vo.PageTableVO;
@@ -156,4 +157,6 @@ public interface UserService {
     public UserEntity getUserByEmpId(String empId);
 
     UserEntity getUserByRequest(HttpServletRequest request);
+
+    UserEntity saveOrGetThirdUser(ThirdUserVo thirdUserVo);
 }
