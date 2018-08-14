@@ -474,7 +474,7 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     public UserEntity saveOrGetThirdUser(ThirdUserVo thirdUserVo) {
-       UserEntity userEntity =  userDao.findByName(thirdUserVo.getUserId());
+       UserEntity userEntity =  getUser(thirdUserVo.getUserId());
        if(userEntity == null){
             //没有这创建帐户
            userEntity = new UserEntity();

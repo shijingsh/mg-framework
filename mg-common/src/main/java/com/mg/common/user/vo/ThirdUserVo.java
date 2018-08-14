@@ -1,7 +1,5 @@
 package com.mg.common.user.vo;
 
-import javax.persistence.Transient;
-
 /**
  * 第三方登录用户
  * Created by liukefu on 2018/8/11.
