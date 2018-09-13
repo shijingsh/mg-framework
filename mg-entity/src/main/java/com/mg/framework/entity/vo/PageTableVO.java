@@ -32,6 +32,14 @@ public class PageTableVO extends MgPageable {
 			setPageSize(vo.getPageSize());
 		}
 	}
+	public PageTableVO(Page page,MgPageable vo) {
+		if(page!=null){
+			setRowData(page.getContent());
+			setTotalCount(page.getTotalElements());
+			setPageNo(vo.getPageNo());
+			setPageSize(vo.getPageSize());
+		}
+	}
 	public List<?> getRowData() {
 		return rowData;
 	}
