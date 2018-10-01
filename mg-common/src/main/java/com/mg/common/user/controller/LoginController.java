@@ -190,4 +190,28 @@ public class LoginController {
 
         return JsonResponse.success(null, null);
     }
+
+
+    @ResponseBody
+    @RequestMapping("/weixinToken")
+    public String weixinToken() {
+
+        String grant_type = req.getParameter("grant_type");
+
+        if (StringUtils.isNotBlank(grant_type)){
+            String appid = PropertyConfigurer.getConfig("weixin.appid");
+            String secret = PropertyConfigurer.getConfig("weixin.secret");
+            String url = "https://api.weixin.qq.com/cgi-bin/token?grant_type="+grant_type+"&appid="+appid+"&secret="+secret;
+
+            String json = HttpClientUtil.sendGetRequest(url);
+            JSONObject jsonObject = JSON.parseObject(json);
+            String errcode = jsonObject.getString("errcode");
+            if (StringUtils.isBlank(errcode)) {
+                String access_token = jsonObject.getString("access_token");
+                return JsonResponse.success(access_token, null);
+            }
+        }
+
+        return JsonResponse.success(null, null);
+    }
 }
