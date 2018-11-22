@@ -102,4 +102,15 @@ public abstract class MgPageable implements Serializable {
         }
         return new PageRequest(page, getPageSize(), sort);
     }
+
+    public PageRequest createPageRequest(Sort.Order... orders) {
+        Sort sort = new Sort(orders);
+
+        int page = getPageNo();
+        if (page >= 1) {
+            //分页从0开始
+            page = page - 1;
+        }
+        return new PageRequest(page, getPageSize(), sort);
+    }
 }
