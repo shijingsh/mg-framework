@@ -12,7 +12,7 @@
     <packaging>jar</packaging>
 
     <build>
-        <finalName>ms-entity</finalName>
+        <finalName>mg-entity</finalName>
         <defaultGoal>compile</defaultGoal>
         <plugins>
             <!-- query dsl 自动生成相应的查询类-->
