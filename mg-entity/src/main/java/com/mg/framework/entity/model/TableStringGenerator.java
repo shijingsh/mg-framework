@@ -66,7 +66,7 @@ public class TableStringGenerator extends TableGenerator {
             BaseEntity baseEntity = (BaseEntity) obj;
             if (StringUtils.isNotBlank(baseEntity.getId())) {
                 String pk = baseEntity.getId();
-                logger.debug("get pk from BaseEntity: " + pk);
+                //logger.debug("get pk from BaseEntity: " + pk);
                 return pk;
             }
         }
@@ -85,7 +85,7 @@ public class TableStringGenerator extends TableGenerator {
         String instanceSeqId =  MgDataSource.getTenantID();
         String id;
         if(instanceSeqId == null) {
-            logger.warn("没有找到对应的实例，采用缺省的的主键生成方式");
+            //logger.warn("没有找到对应的实例，采用缺省的的主键生成方式");
             id = "" + super.generate(session, obj);
         }
         else {
@@ -94,11 +94,11 @@ public class TableStringGenerator extends TableGenerator {
                 tableGenerator = new TableGenerator();
                 tableGenerator.configure(new IntegerType(), defaultParams, defaultDialet);
                 multiTenantTableGenerator.put(instanceSeqId, tableGenerator);
-                logger.info("创建{}的主键生成器。", instanceSeqId);
+                //logger.info("创建{}的主键生成器。", instanceSeqId);
             }
             id = "" + tableGenerator.generate(session, obj);
         }
-        logger.debug("generate pk id: {} {}", obj.getClass(), id);
+        //logger.debug("generate pk id: {} {}", obj.getClass(), id);
         return id;
     }
 
