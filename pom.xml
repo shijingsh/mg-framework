@@ -59,7 +59,7 @@
     <spring.version>5.1.6.RELEASE</spring.version>
     <!--<hibernate.version>4.3.7.Final</hibernate.version>-->
     <!--<hibernate.version>3.6.10.Final</hibernate.version>-->
-    <hibernate.version>4.2.11.Final</hibernate.version>
+    <hibernate.version>5.4.24.Final</hibernate.version>
     <struts.version>1.3.8</struts.version>
     <poi.version>3.10-FINAL</poi.version>
     <activiti.version>5.14</activiti.version>
