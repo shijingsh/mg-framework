@@ -42,7 +42,6 @@ public class AuthorizationHelper {
 	 */
 	public void clearAuthorizationInfo(String loginUserName, String companyName) {
 
-		// 例如:"10866:绍兴银行"
 		String cacheKey = toCacheKey(loginUserName, companyName);
 
 		if (log.isDebugEnabled()) {
